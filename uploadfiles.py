@@ -31,7 +31,7 @@ if menu == "Upload Image":
     if imageholder:
         st.image(imageholder)
 
-        
+
 
 
 #classwork: 
