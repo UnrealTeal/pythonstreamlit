@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+st.set_page_config(page_title="Upload Files",page_icon="📻")
 
 menu = st.sidebar.selectbox("Choose an option",["Upload CSV","Upload Audio","Upload Video","Upload Image"])
 
