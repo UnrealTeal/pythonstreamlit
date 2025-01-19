@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly_express as px
 st.set_page_config(page_title="Upload Files",page_icon="📻")
 
 menu = st.sidebar.selectbox("Choose an option",["Upload CSV","Upload Audio","Upload Video","Upload Image"])
@@ -13,6 +14,30 @@ if menu == "Upload CSV":
 
         with st.expander("View CSV Table"): # like a toggle (open and close)
             st.table(readcsv)
+
+        readcsvcolumns = readcsv.columns # read all columns in csv file
+
+        selectcolumns = st.multiselect("Choose Columns to plot",readcsvcolumns)
+        col1,col2 = st.columns(2)
+        with col1:
+            selectchart = st.radio("Choose Coloumns Stats Operator",["Average",'Sum','Count'],horizontal=True)
+        with col2:
+            selectoperator = st.radio("Choose Column Stats operator",["Bar Chart",'Pie Chart'],horizontal=True)
+        
+        if selectcolumns:
+            if selectchart == 'Average':
+                ave_op = readcsv[selectcolumns].mean().reset_index()
+                # st.table(ave_op)
+
+                if selectoperator == "Bar Chart":
+                    barchart = px.bar(ave_op, x= 'index', y=0,labels={'index':'Subject',"0":"Average"})
+                    st.plotly_chart(barchart)
+
+                elif selectoperator == "Pie Chart":
+                    piechart = px.pie(ave_op, names= 'index', values=0,labels={'index':'Subject',"0":"Average"})
+                    st.plotly_chart(piechart)
+
+
 
 if menu == "Upload Audio":
     st.subheader("Upload Audio To Play")
@@ -31,13 +56,3 @@ if menu == "Upload Image":
     imageholder = st.file_uploader("image")
     if imageholder:
         st.image(imageholder)
-
-
-
-
-#classwork: 
-# put a button to click to play
-# check to handle errors 
-#ability test on uploadCSV
-# use a multiselect to choose columns to plot: create a variable called columnslist = 'read your pandas file'.to_list()
-# use a radio to choose statistical operators (sum,average,count) #check your previous work

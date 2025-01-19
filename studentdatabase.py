@@ -47,6 +47,7 @@ if menu == "Student Scores":
         table_two = pd.DataFrame(studentDict) # table converted from the dictionary
         both_tables = pd.concat([table_one,table_two], ignore_index= True) # both tables joined together
         both_tables.to_csv("studentDataBase.csv", index= False) # saves in this location
+        st.table(studentDict)
 
 if menu == "Database/Chart":
 
