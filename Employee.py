@@ -3,11 +3,13 @@ import pandas as pd
 from fpdf import FPDF
 import base64
 
-st.set_page_config(layout="wide")
 csvfile = pd.read_csv("SDatabase.csv")
+st.set_page_config(layout="wide",page_title="Emplotee DB",page_icon="📃")
 menu = st.sidebar.selectbox("Menu",["Register Staff","Staff Database","Staff File"])
 User_id = "User-" + str(len(csvfile)+1)
 
+
+st.sidebar.info("Made by Temi")
 
 if menu == "Register Staff":  #staff registration
     st.subheader("Registration")
