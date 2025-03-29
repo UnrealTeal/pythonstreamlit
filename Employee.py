@@ -8,7 +8,6 @@ st.set_page_config(layout="wide",page_title="Emplotee DB",page_icon="📃")
 menu = st.sidebar.selectbox("Menu",["Register Staff","Staff Database","Staff File"])
 User_id = "User-" + str(len(csvfile)+1)
 
-
 st.sidebar.info("Made by Temi")
 
 if menu == "Register Staff":  #staff registration
