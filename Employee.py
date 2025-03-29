@@ -198,19 +198,24 @@ if menu == "Staff File":
                     file_output = 'employeefile.pdf'
                     file.output(file_output)
                     return file_output
+                file_Function = Generate_file()
+
+                with open(file_Function, "rb") as binary:
+                    read_file = binary.read()
+                st.sidebar.download_button(label="Download Employee File",data=read_file,file_name="EmployeeFile.pdf",mime="application/pdf")
+
+
+                #if st.sidebar.button('View User File'):
+                    
+                        #write_file  = base64.b64encode(read_file).decode("utf-8")
+
+                        #view_file = f'<embed src="data:application/pdf;base64,{write_file}" type="application/pdf" width="100%" height="600px" />'
+
+                        #st.markdown(view_file,unsafe_allow_html=True)
+
                 
 
-                if st.sidebar.button('Download User File'):
-                    file_Function = Generate_file()
 
-                    with open(file_Function, "rb") as binary:
-                        read_file = binary.read()
-
-                        write_file  = base64.b64encode(read_file).decode("utf-8")
-
-                        view_file = f'<embed src="data:application/pdf;base64,{write_file}" type="application/pdf" width="100%" height="600px" />'
-
-                        st.markdown(view_file,unsafe_allow_html=True)
             except IndexError:
                 st.error('User not found')
         else:
